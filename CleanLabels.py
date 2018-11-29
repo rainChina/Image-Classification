@@ -21,10 +21,10 @@ def afm_clean_export(src, aim):
     for item in ['hs', 'hg', 'hp', 'vg', 'hl', 'vl', 'hb']:
         data['noise'] = data['noise'].str.replace(item,item[1:])
 
-    # cnt = 0;
-    # for v in data['imPath']:
-    #     data.loc[cnt,'imName'] = os.path.basename(v)
-    #     cnt += 1
+    cnt = 0;
+    for v in data['imPath']:
+        data.loc[cnt,'imName'] = os.path.basename(v)
+        cnt += 1
 
     data['noise_simple'] = data['noise'].copy()
     data.loc[data['noise_simple']!='c', 'noise_simple'] = 'n'
@@ -38,14 +38,14 @@ def afm_clean_export(src, aim):
 
     # {nan,  'hs',  'hg', 'hp',  'vg', 'w', 'hl', 'vl', 'p', 'n', 'x', 'hb'}
 
-def split(src, train_file, test_file):
-    dfRaw = pd.read_csv(src)
-    dfTrain, dfTest = train_test_split(dfRaw, test_size=0.2, random_state=122)
-    print(dfTrain.head())
-    # dfShuffle = dfRaw.sample(frac=1).reset_index(drop=True)
-    dfTrain[['id','noise_simple']].to_csv(train_file,index=False)
-    dfTest[['id','noise_simple']].to_csv(test_file,index=False)
+# def split(src, train_file, test_file):
+#     dfRaw = pd.read_csv(src)
+#     dfTrain, dfTest = train_test_split(dfRaw, test_size=0.2, random_state=122)
+#     print(dfTrain.head())
+#     # dfShuffle = dfRaw.sample(frac=1).reset_index(drop=True)
+#     dfTrain[['id','noise_simple']].to_csv(train_file,index=False)
+#     dfTest[['id','noise_simple']].to_csv(test_file,index=False)
 
 afm_clean_export('afm.csv','afm_clean.csv')
 
-split('afm_clean.csv','afm_train.csv', 'afm_test.csv')
+# split('afm_clean.csv','afm_train.csv', 'afm_test.csv')
