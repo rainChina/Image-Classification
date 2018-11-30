@@ -38,14 +38,19 @@ def afm_clean_export(src, aim):
 
     # {nan,  'hs',  'hg', 'hp',  'vg', 'w', 'hl', 'vl', 'p', 'n', 'x', 'hb'}
 
-# def split(src, train_file, test_file):
-#     dfRaw = pd.read_csv(src)
-#     dfTrain, dfTest = train_test_split(dfRaw, test_size=0.2, random_state=122)
-#     print(dfTrain.head())
-#     # dfShuffle = dfRaw.sample(frac=1).reset_index(drop=True)
-#     dfTrain[['id','noise_simple']].to_csv(train_file,index=False)
-#     dfTest[['id','noise_simple']].to_csv(test_file,index=False)
+def split(src, train_file, test_file):
+    dfRaw = pd.read_csv(src)
+    dfTrain, dfTest = train_test_split(dfRaw, test_size=0.3, random_state=122)
+    # plt.subplot(2,1,1)
+    # dfTrain['noise'].value_counts().plot.bar()
+    # plt.subplot(2,1,2)
+    # dfTest['noise'].value_counts().plot.bar()
+    # plt.show()
+    # print(dfTrain.head())
+    # dfShuffle = dfRaw.sample(frac=1).reset_index(drop=True)
+    dfTrain[['id','noise_simple']].to_csv(train_file,index=False)
+    dfTest[['id','noise_simple']].to_csv(test_file,index=False)
 
-afm_clean_export('afm.csv','afm_clean.csv')
+# afm_clean_export('afm.csv','afm_clean.csv')
 
-# split('afm_clean.csv','afm_train.csv', 'afm_test.csv')
+split('afm_clean.csv','afm_train.csv', 'afm_test.csv')
